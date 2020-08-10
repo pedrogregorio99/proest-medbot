@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/styles.css') }}" />
+  <link rel="shortcut icon" type="image/png" href="/static/images/white-logo.png" />
+  <title>MedBot</title>
+</head>
+<body>
+  <!-- Header -->
+  <section id="header">
+    <div class="header container">
+      <div class="nav-bar">
+        <div class="brand">
+          <a href="#"><h1><span>Med</span>Bot</h1></a>
+        </div>
+        <div class="nav-list">
+          <div class="hamburger"><div class="bar"></div></div>
+          <ul>
+            <li><a href="#" data-after="Home">Home</a></li>
+            <li><a href="#services" data-after="Service">Services</a></li>
+            <li><a href="#faq" data-after="FAQ">FAQ</a></li>
+            <li><a href="#about" data-after="About">About Me</a></li>
+            <li><a href="#contact" data-after="Contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Header -->
+
+
+  <!-- Hero Section  -->
+  <section id="hero">
+    <div class="hero container">
+      <div>
+        <h1>Hello, <span></span></h1>
+        <h1>My Name is <span></span></h1>
+        <h1>MedBot <span></span></h1>
+        <form action="#" method="post">
+            <input type="submit" value="Let's talk!" class="cta"/>
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- End Hero Section  -->
+
+  <!-- Service Section -->
+  <section id="services">
+    <div class="services container">
+      <div class="service-top">
+        <h1 class="section-title"><span>MED</span>BOT</h1>
+        <p>I was created to help alleviate certain symptoms manifested by you! I'll try to help you understand what a certain disease is and give you some solutions for it. Although, bear in mind that I am NOT a replacement for your real doctor! Here's what I can do ⬇</p>
+      </div>
+      <div class="service-bottom">
+        <div class="service-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png"/></div>
+          <h2>Diseases</h2>
+          <p>Want to know something about a certain disease? Ask me about it and I'll try to tell you what it is!</p>
+        </div>
+        <div class="service-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png"/></div>
+          <h2>Causes</h2>
+          <p>Is it a mosquito? Is it an accident? Is it a gene? I'll tell you what causes the disease you're searching for.</p>
+        </div>
+        <div class="service-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png"/></div>
+          <h2>Treatments</h2>
+          <p>Wondering what you need to do to get rid of a disease? Why don't you ask me about it?</p>
+        </div>
+        <div class="service-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png"/></div>
+          <h2>Much more</h2>
+          <p>I can also tell you some jokes, random facts or just casually talk to you! I'm your new best friend!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Service Section -->
+
+  <!-- Projects Section -->
+  <section id="faq">
+    <div class="projects container">
+      <div class="projects-header">
+        <h1 class="section-title">Frequently <span>Asked</span> Questions</h1>
+      </div>
+      <div class="all-projects">
+        <div class="project-item">
+          <div class="project-info">
+            <h1>Programming Languages</h1>
+            <h2>Python + HTML & CSS</h2>
+            <p>The ChatBot was programmed using Python and the website was launched using the microframework Flask!</p>
+          </div>
+          <div class="project-img">
+            <img src="/static/images/code.jpg" alt="img">
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-info">
+            <h1>What is a Chatbot?</h1>
+            <h2>Google says ...</h2>
+            <p>A Chatbot is a computer program designed to simulate conversation with human users, especially over the Internet.</p>
+          </div>
+          <div class="project-img">
+            <img src="/static/images/robot.jpg" alt="img">
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-info">
+            <h1>Does the Chatbot store my data?</h1>
+            <h2>Well yes, but actually no.</h2>
+            <p>Don't worry, it doesn't. The only thing it saves is the question you ask him, whenever he doesn't know how to answer it.</p>
+          </div>
+          <div class="project-img">
+            <img src="/static/images/database.jpg" alt="img">
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-info">
+            <h1>What is Medbot?</h1>
+            <h2>Your new best friend!</h2>
+            <p>Medbot is a system developed in order to help you solve a certain symptom you might have. You tell it the problem and he'll try to give you an amazing solution to it!</p>
+          </div>
+          <div class="project-img">
+            <img src="/static/images/talking.jpg" alt="img">
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-info">
+            <h1>How does the bot know what to answer?</h1>
+            <h2>MedBot is quite smart!</h2>
+            <p>And he'll look to the models he has, compares to what you sent him and finds a proper answer. 
+              When it comes to the diseases, MedBot has it's own database and he looks for special words in your message.
+              This way he'll find what you want in a faster way and with less chance to errors.</p>
+          </div>
+          <div class="project-img">
+            <img src="/static/images/thinking.jpg" alt="img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Projects Section -->
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="about container">
+      <div class="col-left">
+        <div class="about-img">
+          <img src="/static/images/euzinho.jpg" alt="img">
+        </div>
+      </div>
+      <div class="col-right">
+        <h1 class="section-title">About <span>me</span></h1>
+        <h2>Pedro Gregório - Biomedical Engineering Student</h2>
+        <p>Hello! My name is Pedro and I'm a Biomedical Engineering Student. I'm currently in the last year of my graduation and can't wait to finally be able to say: "Trust me, I'm an engineer"! MedBot was the last project of my degree and I hope it pays off!</p>
+      </div>
+    </div>
+  </section>
+  <!-- End About Section -->
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="contact container">
+      <div><h1 class="section-title">Contact <span>info</span></h1></div>
+      <div class="contact-items">
+
+        <div class="contact-item">
+          <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/new-post.png"/></div>
+          <div class="contact-info">
+            <h1>Email</h1>
+            <h2>1170693@isep.ipp.pt</h2>
+            <h2>pedromi99@hotmail.com</h2>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  <!-- End Contact Section -->
+
+  <!-- Footer -->
+  <section id="footer">
+    <div class="footer container">
+      <div class="brand"><h1><span>P</span>edro <span>G</span>regório</h1></div>
+      <h2>Meet me here:</h2>
+      <div class="social-icon">
+        <div class="social-item">
+          <a target="_blank" href="https://www.facebook.com/pedrogregs/"><img src="https://img.icons8.com/bubbles/100/000000/facebook-new.png"/></a>
+        </div>
+        <div class="social-item">
+          <a target="_blank" href="https://www.instagram.com/pedro.gregs/"><img src="https://img.icons8.com/bubbles/100/000000/instagram-new.png"/></a>
+        </div>
+        <div class="social-item">
+          <a target="_blank" href="https://twitter.com/PedroGregs"><img src="https://img.icons8.com/bubbles/100/000000/twitter.png"/></a>
+        </div>
+        <div class="social-item">
+          <a target="_blank" href="https://www.linkedin.com/in/pedro-greg%C3%B3rio-432919198/"><img src="https://img.icons8.com/bubbles/100/000000/linkedin.png"/></a>
+        </div>
+      </div>
+      <p>Copyright © 2020 Pedro Gregório. All rights reserved</p>
+    </div>
+  </section>
+  <!-- End Footer -->
+  <script src="/static/javascript/app.js"></script>
+</body>
+</html>

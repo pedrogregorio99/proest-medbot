@@ -1,0 +1,39 @@
+{% extends "base.html" %} 
+
+{% block title %} MedBot - Diseases {% endblock%}
+
+{% block header %}
+<header id="only-header">
+    <div class="container">
+        <h1><a href="/diseases">MedBot - Diseases 😷</a></h1>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<section id="main-contact">
+    <div class="container">
+    
+        <p>Wondering what diseases MedBot knows? Here they are (Updated) 💡</p>
+        <p>Number of diseases: {{number}} 💊</p>
+
+        {% for disease in dis %}
+            <li>{{ disease.capitalize() }}</li>
+        {% endfor %}
+
+    </div>
+</section>
+
+<section id="showcase">
+
+    <div class="container">
+
+   <div id="logout_button">
+        <form action="#" method="post" > 
+            <p><input type="submit" value="Log Out"/></p>            
+        </form>
+   </div>
+
+</section>
+
+{% endblock %}

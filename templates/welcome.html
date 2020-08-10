@@ -1,0 +1,82 @@
+{% extends "welcome_base.html" %} 
+
+{% block title %} MedBot {% endblock%}
+
+{% block header %}
+<header id="only-header">
+    <div class="container">
+        <h1><a href="/">MedBot - Reception 🩺</a></h1>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+
+<section id="showcase">
+    <div class="first">
+
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        
+        {% for message in messages %}
+          <p>{{ message }}</p>
+        {% endfor %}
+
+      {% endif %}
+    {% endwith %}
+
+        <h2>MedBot is waiting for you!</h2>
+
+        <form action="#" method="post" > 
+            <p>Email: </p>
+            <p><input type="text" name="email"/></p>
+            <p>Password: </p>
+            <p><input type="password" name="password"/></p>
+
+            <section id="intro">
+            
+              <div id="intro-content" class="center-content">
+            
+                <div class="center-content-inner">
+            
+                  <div class="content-section content-section-margin">
+            
+                    <div class="content-section-grid clearfix">
+                    
+                    <a href="#" class="button nav-link">
+            
+                      <div class="bottom"></div>
+            
+                      <div class="top">
+            
+                      <div class="label">
+                        <input class="label" type="submit" value="Visit MedBot"/>
+                        </div>
+                        
+                            <div class="button-border button-border-left"></div>
+                          <div class="button-border button-border-top"></div>
+                          <div class="button-border button-border-right"></div>
+                            <div class="button-border button-border-bottom"></div>
+            
+                      </div>
+            
+                        </a>
+            
+                    </div>
+            
+                   </div>
+            
+                  </div>
+            
+                 </div>
+            
+              </section>
+
+        </form>
+
+        <img src="../static/images/welcome.png" style="padding: 30px;" class = "center" height="240" alt="Hold up!">
+
+    </div>
+</section>
+
+{% endblock %}

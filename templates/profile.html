@@ -1,0 +1,34 @@
+{% extends "base.html" %} 
+
+{% block title %} Profile {% endblock%}
+
+{% block header %}
+<header id="only-header">
+    <div class="container">
+        <h1><a href="/profile">{{fm}} - Profile 💼</a></h1>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+
+<section id="main-contact">
+    <div class="container">
+
+        <p>First Name: {{fm}}</p>
+        <p>Last Name: {{lm}}</p>
+        <p>Email: {{em}}</p>
+        <p>You've recently searched for these diseases:</p>
+        {% for line in us %}
+            <li>{{line}}</li>
+        {% endfor %}
+
+    <div id="logout_button">
+        <form action="#" method="post" > 
+            <p><input type="submit" value="Log Out"/></p>            
+        </form>
+    </div>
+
+</section>
+
+{% endblock %}

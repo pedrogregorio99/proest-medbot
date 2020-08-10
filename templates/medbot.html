@@ -1,0 +1,60 @@
+{% extends "base.html" %} 
+
+{% block title %} MedBot {% endblock%}
+
+{% block header %}
+<header id="only-header">
+    <div class="container">
+        <h1><a href="/medbot">MedBot - Always close to you 🩺</a></h1>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</header>
+{% endblock %}
+
+{% block content %}
+
+<div>
+    <div id="chatbox">
+        <p class="botText"><span>Medbot 👨‍⚕️: Hello {{usr}}, I'm MedBot! A virtual doctor created to help you! Let's talk! 🏥</span></p>
+    </div>
+    <div id="userInput">
+        <input id="textInput" type="text" name="msg" placeholder="Tell me something ...">
+        <input id="buttonInput" type="submit" value="Send">
+    </div>
+    <script>
+        function getBotResponse() {
+            var rawText = $("#textInput").val();
+            var userHtml = '<p class="userText"><span>{{usr}}: ' + rawText + '</span></p>';
+            $("#textInput").val("");
+            $("#chatbox").append(userHtml);
+            document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+            $.get("/get", { msg: rawText }).done(function(data) {
+                var botHtml = '<p class="botText"><span>MedBot 👨‍⚕️: ' + data + '</span></p>';
+                $("#chatbox").append(botHtml);
+                document.getElementById('userInput').scrollIntoView({block: 'start', behavior: 'smooth'});
+            });
+        }
+        $("#textInput").keypress(function(e) {
+            if(e.which == 13) {
+                getBotResponse();
+            }
+        });
+        $("#buttonInput").click(function() {
+            getBotResponse();
+        })
+    </script>
+</div>
+
+<section id="showcase">
+
+    <div class="container">
+
+   <div id="logout_button">
+        <form action="#" method="post" > 
+            <p><input type="submit" value="Log Out"/></p>            
+        </form>
+   </div>
+
+</section>
+
+{% endblock %}

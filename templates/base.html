@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stylesheets/previous_styles.css') }}" />
+    <link rel="shortcut icon" type="image/png" href="/static/images/white-logo.png" />
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+
+    {% block header %}
+    
+    {% endblock %}
+
+    <nav id="nav-bar">
+        <div class="container">
+          <ul>
+            <li>
+              <a class="nav-link" href="/medbot">MedBot</a>
+            </li>
+            <li>
+              <a class="nav-link" href="/diseases">Diseases</a>
+            </li>
+            <li>
+              <a class="nav-link" href="/profile">Profile</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    
+
+    {% block content %}
+        
+    {% endblock %}
+
+    {% block footer %}
+        <footer id="main-footer">
+            <p>Pedro Gregório &copy; 2020</p>
+        </footer>
+    {% endblock %}
+
+
+</body>
+
+</html>
