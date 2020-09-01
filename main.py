@@ -5,6 +5,7 @@ from medbot import joke, fact, checkDisease, getDisease, getAnswer, saveUnknown,
 import random
 from datetime import timedelta
 import json
+import string
 from flask_sqlalchemy import SQLAlchemy
 
 import en_core_web_sm
@@ -32,11 +33,13 @@ chatbot = ChatBot(
     logic_adapters=[
         {
             "import_path": "chatterbot.logic.BestMatch",
-            "statement_comparison_function": comparisons.LevenshteinDistance,
-            # "response_selection_method": response_selection.get
+            "statement_comparison_function": comparisons.JaccardSimilarity,
+            "response_selection_method": response_selection.get_first_response,
+            'default_response': 'I am sorry, but I do not understand.',
+            'maximum_similarity_threshold': 0.90
         }
     ],
-    database_uri='sqlite:///medbot_15_database.sqlite3'
+    database_uri='sqlite:///medbot_15_database.sqlite3?check_same_thread=False'
 )
 
 trainer = ChatterBotCorpusTrainer(chatbot)
@@ -109,7 +112,7 @@ def login():
 def register():
     if "email" in session:
         user = session["email"]
-        return render_template("user.html", usr = user)
+        return render_template("medbot.html", usr = user)
     else:
         if request.method == "GET":
             return render_template("register.html")
@@ -119,12 +122,21 @@ def register():
             email = request.form['email']
             password = request.form['password']
 
-            usr = users(first_name, last_name, email, password)
+            found_user = users.query.filter_by(email = email).first()
 
-            db.session.add(usr)
-            db.session.commit()
+            if found_user:
+                flash("Email already in use.", "error")
+                return redirect(url_for("login"))
+            
+            else:
+                usr = users(first_name, last_name, email, password)
 
-            return redirect(url_for("login"))
+                db.session.add(usr)
+                db.session.commit()
+
+                flash("Register Successful.", "info")
+
+                return redirect(url_for("login"))
 
 @app.route("/medbot", methods = ["POST", "GET"])
 def medbot():
@@ -141,6 +153,7 @@ def medbot():
             else:
                 return render_template("medbot.html", usr = "Anonymous")
     else:
+        flash("You must log in, first.", "warning")
         return redirect(url_for("login"))
 
 @app.route("/diseases",  methods = ["GET", "POST"])
@@ -152,14 +165,15 @@ def diseases():
         else:
             return render_template("diseases.html", dis = data, number = len(data))
     else:
-        return redirect(url_for("welcome"))
+        flash("You must log in, first.", "warning")
+        return redirect(url_for("login"))
 
 @app.route("/profile",  methods = ["GET", "POST"])
 def profile():
     if "email" in session:
         if request.method == "POST":
             session.pop("email", None)
-            return redirect(url_for("welcome"))
+            return redirect(url_for("medbot"))
         else:
             email = session["email"]
             if email != "Anonymous":
@@ -185,17 +199,44 @@ def profile():
                 words = ["You", "Have", "No", "Power", "Here", ":D"]
                 return render_template("profile.html", fm = "Anonymous", lm = "User", em = "Anonymous", us = words)
     else:
-        return redirect(url_for("welcome"))
+        flash("You must log in, first.", "warning")
+        return redirect(url_for("login"))
+
+@app.route("/extras",  methods = ["GET", "POST"])
+def extras():
+    if "email" in session:
+        if request.method == "POST":
+            session.pop("email", None)
+            return redirect(url_for("medbot"))
+        else:
+            email = session["email"]
+            if email != "Anonymous":
+                found_user = users.query.filter_by(email = email).first()
+
+                f_name = found_user.first_name
+                
+                return render_template("extras.html", fm = f_name)
+            else:
+                return render_template("extras.html", fm = "Anonymous")
+    else:
+        return redirect(url_for("medbot"))
 
 @app.route("/get")
 def get_bot_response():
     user_input = request.args.get('msg')
+    user_input = user_input.lower()
+    user_input = user_input.translate(str.maketrans('', '', string.punctuation))
 
     if "email" in session:
         email = session["email"]
 
     if checkDisease(user_input): # Verify is disease exists in input
         disease = getDisease(user_input) # Gets the disease
+
+        if disease != None:
+            session["previous_disease"] = disease
+        else:
+            disease = session["previous_disease"]
 
         with open("./files/%s_search_list.txt"%(email), "a") as file:
                 file.write(disease + "\n")
