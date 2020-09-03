@@ -1,6 +1,6 @@
 import random
 
-JOKES_INPUTS = ("joke", "funny", "laugh")
+JOKES_INPUTS = ("joke", "funny", "fun", "laugh")
 JOKES_RESPONSES = ["I'm not Google.", "I'm not Alexa.", "I'm not Siri", "Friends, Season 5, Episode 16, 11:25.", "What do you get when you cross an alien and a chicken? Eggs-traterrestrial.",
 "What do you get when you cross music and an automobile? Cartune.", "How do you throw a space party? You planet!", "Why don't scientists trust atoms? Because they make up everything!",
 "Why did the gym close down? It just didn't work out!", "You know what I saw today? Everything I looked at.", "Where are average things manufactured? The satisfactory.", 
@@ -18,7 +18,7 @@ def joke(message):
         if word.lower() in JOKES_INPUTS:
             return random.choice(JOKES_RESPONSES)
 
-FACTS_INPUTS = ("random fact", "fact")
+FACTS_INPUTS = ("random", "fact")
 FACTS_RESPONSES = ["Some cats are allergic to people (same but don't tell anyone this).", "M&M stands for Mars and Murrie.", "Neil Armstrong didn't say 'That's one small step for man.'", 
 "You can major in wine at Cornell University.", "About 700 grapes go into one bottle of wine.", "Fear of the number 13 is called triskaidekaphobia.", 
 "Banging your head against a wall for one hour burns 150 calories, but PLEASE don't do that!", "Cherophobia is an irrational fear of fun or happiness.", 
