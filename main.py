@@ -254,7 +254,7 @@ def get_bot_response():
         elif(howMany(user_input, data) != None):
             return(str(howMany(user_input, data)))
 
-        if (fact(user_input) != None):
+        elif (fact(user_input) != None):
             return(str(fact(user_input)))
 
         elif (joke(user_input) != None):
