@@ -1,20 +1,20 @@
 import json
 import random
 
-with open("diseases.json", encoding="utf-8") as file:
+with open("/home/pedrogregorio99/medbot/diseases.json", encoding="utf-8") as file:
     data = json.load(file)
-    
+
 JOKES_INPUTS = ("joke", "funny", "laugh")
-JOKES_RESPONSES = ["I'm not Google.", "I'm not Alexa.", "I'm not Siri", "Friends, Season 5, Episode 16, 11:25.", "What do you get when you cross an alien and a chicken? Eggs-traterrestrial.",
+JOKES_RESPONSES = ["I'm not Google.", "I'm not Alexa.", "I'm not Siri.", "Friends, Season 5, Episode 16, 11:25.", "What do you get when you cross an alien and a chicken? Eggs-traterrestrial.",
 "What do you get when you cross music and an automobile? Cartune.", "How do you throw a space party? You planet!", "Why don't scientists trust atoms? Because they make up everything!",
-"Why did the gym close down? It just didn't work out!", "You know what I saw today? Everything I looked at.", "Where are average things manufactured? The satisfactory.", 
+"Why did the gym close down? It just didn't work out!", "You know what I saw today? Everything I looked at.", "Where are average things manufactured? The satisfactory.",
 "Why was six afraid of seven? Because seven ate nine.", "How do trees get online? They just log on!", "Why did the orange stop? It ran out of juice!",
 "What did 0 say to 8? Nice belt!", "I never make mistakes! I thought I did once but I was actually wrong.", "Why doesn't the sun go to college? Because it has a million degrees!",
 "Why are skeletons so calm? Because nothing gets under their skin.", "What's red and moves up and down? A tomato in an elevator!", "A dyslexic man walks into a bra.",
-"I went to buy some camouflage trousers the other day, but I couldn’t find any.", "What’s the best thing about Switzerland? I don’t know, but the flag is a big plus.", 
+"I went to buy some camouflage trousers the other day, but I couldn’t find any.", "What’s the best thing about Switzerland? I don’t know, but the flag is a big plus.",
 "I invented a new word! Plagiarism!", "Why don’t scientists trust atoms? Because they make up everything.", "Why don’t Calculus majors throw house parties? Because you should never drink and derive.",
-"What did the left eye say to the right eye? Between you and me, something smells.", "What do you call a fake noodle? An impasta.", 
-"What do you call a magic dog? A labracadabrador.", "What’s orange and sounds like a carrot? A parrot.", "How did Batman name his bathroom? The Batroom.", 
+"What did the left eye say to the right eye? Between you and me, something smells.", "What do you call a fake noodle? An impasta.",
+"What do you call a magic dog? A labracadabrador.", "What’s orange and sounds like a carrot? A parrot.", "How did Batman name his bathroom? The Batroom.",
 "Why did the M&M go to school? It wanted to be a Smartie."]
 
 def joke(message):
@@ -22,15 +22,15 @@ def joke(message):
         if word.lower() in JOKES_INPUTS:
             return random.choice(JOKES_RESPONSES)
 
-FACTS_INPUTS = ("random fact", "fact")
-FACTS_RESPONSES = ["Some cats are allergic to people (same but don't tell anyone this).", "M&M stands for Mars and Murrie.", "Neil Armstrong didn't say 'That's one small step for man.'", 
-"You can major in wine at Cornell University.", "About 700 grapes go into one bottle of wine.", "Fear of the number 13 is called triskaidekaphobia.", 
-"Banging your head against a wall for one hour burns 150 calories, but PLEASE don't do that!", "Cherophobia is an irrational fear of fun or happiness.", 
-"If Pinocchio says “My Nose Will Grow Now”, it would cause a paradox.", "Heart attacks are more likely to happen on a Monday but we both knew this.", 
+FACTS_INPUTS = ("fact", "facts", "something")
+FACTS_RESPONSES = ["Some cats are allergic to people (same but don't tell anyone this).", "M&M stands for Mars and Murrie.", "Neil Armstrong didn't say 'That's one small step for man.'",
+"You can major in wine at Cornell University.", "About 700 grapes go into one bottle of wine.", "Fear of the number 13 is called triskaidekaphobia.",
+"Banging your head against a wall for one hour burns 150 calories, but PLEASE don't do that!", "Cherophobia is an irrational fear of fun or happiness.",
+"If Pinocchio says “My Nose Will Grow Now”, it would cause a paradox.", "Heart attacks are more likely to happen on a Monday but we both knew this.",
 "In 2017 more people were killed from injuries caused by taking a selfie than by shark attacks.", "Dead people can get goose bumps.", "A single strand of Spaghetti is called a “Spaghetto”.",
-"At birth, a baby panda is smaller than a mouse.", "The world’s largest grand piano was built by a 15-year-old in New Zealand.", "Violin bows are commonly made from horse hair.", 
-"In Svalbard, a remote Norwegian island, it is illegal to die.", "There is an underwater version of rugby, unsurprisingly called “underwater rugby”.", 
-"Saint Lucia is the only country in the world named after a woman.", "If you heat up a magnet, it will lose its magnetism.", "The Marshal Mathers foundation for at-risk and disadvantaged youth, was founded by Eminem.", 
+"At birth, a baby panda is smaller than a mouse.", "The world’s largest grand piano was built by a 15-year-old in New Zealand.", "Violin bows are commonly made from horse hair.",
+"In Svalbard, a remote Norwegian island, it is illegal to die.", "There is an underwater version of rugby, unsurprisingly called “underwater rugby”.",
+"Saint Lucia is the only country in the world named after a woman.", "If you heat up a magnet, it will lose its magnetism.", "The Marshal Mathers foundation for at-risk and disadvantaged youth, was founded by Eminem.",
 "The oldest unopened bottle of wine was found in a Roman tomb that is over 1,650 years old."]
 
 def fact(message):
@@ -122,6 +122,8 @@ def getCategories(symptom):
         return categories
     else:
         return False
+
+
 
 def checkSymptoms(message):
 
@@ -233,7 +235,7 @@ def checkSymptoms(message):
 
     if symptoms:
         for symptom in symptoms:
-            answer = answer + "🆘 " + str(symptom.capitalize()) + " is a symptom for these conditions:<br>"
+            answer = answer + "&nbsp;&nbsp;🆘 " + str(symptom.capitalize()) + " is a symptom for these conditions:<br>"
             categories = getCategories(symptom)
             for category in categories:
                 answer = answer + "&nbsp;&nbsp;" + getDiseases(category) + "<br>"
@@ -248,9 +250,9 @@ def checkDisease(message):
             return True # Disease was found
 
 def getDisease(message):
-    message = message.lower()
     for disease in data: # Checks all items in json file
         if disease in message: # Checks if user input has a disease in it
+
             if disease == "diabetes":
                 if "type 1" in message:
                     return "type 1 diabetes"
@@ -265,10 +267,14 @@ def getDisease(message):
                 elif "rheumatoid" in message:
                     return "rheumatoid arthritis"
 
+                else:
+                    return "arthritis"
+
             else:
                 return disease # Returns the disease found
 
-def getAnswer(user_input, disease): 
+
+def getAnswer(user_input, disease):
 
     if "what is" in user_input or "whats" in user_input or "tell me about" in user_input or disease == user_input:
         return(str(data[disease]["definition"]))
@@ -289,5 +295,5 @@ def getAnswer(user_input, disease):
         return("What do you wish to know? You can ask me what is " + disease + ", what can I do to prevent " + disease + ", what causes " + disease + " and where you can learn more about it. Try it out!")
 
 def saveUnknown(message):
-    with open("./files/UnknownAnswers.txt", "a") as file:
+    with open("/home/pedrogregorio99/medbot/files/UnknownAnswers.txt", "a") as file:
         file.write(message + "\n")
