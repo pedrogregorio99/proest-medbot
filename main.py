@@ -248,17 +248,18 @@ def get_bot_response():
         return(checkSymptoms(user_input))
 
     else:
+        if(randomD(user_input, data) != None):
+            return(str(randomD(user_input, data)))
+
+        elif(howMany(user_input, data) != None):
+            return(str(howMany(user_input, data)))
+
         if (fact(user_input) != None):
             return(str(fact(user_input)))
 
         elif (joke(user_input) != None):
             return(str(joke(user_input)))
-
-        elif(randomD(user_input, data) != None):
-            return(str(randomD(user_input, data)))
-
-        elif(howMany(user_input, data) != None):
-            return(str(howMany(user_input, data)))
+        
         else:
             answer = chatbot.get_response(user_input)
             if str(answer) == "I am sorry, but I do not understand.": # Bot doesn't know how to answer
