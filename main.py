@@ -1,7 +1,8 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash
 from chatterbot import ChatBot, comparisons, response_selection
 from chatterbot.trainers import ChatterBotCorpusTrainer
-from medbot import joke, fact, checkDisease, getDisease, getAnswer, saveUnknown, checkSymptoms
+from medbot import checkDisease, getDisease, getAnswer, saveUnknown, checkSymptoms
+from extra import joke, fact, howMany, randomD
 import random
 from datetime import timedelta
 import json
@@ -253,12 +254,11 @@ def get_bot_response():
         elif (joke(user_input) != None):
             return(str(joke(user_input)))
 
-        elif "how many diseases" in user_input.lower():
-            return("I know " + str(len(data)) + " diseases.") # Returns the number of diseases in .json file
+        elif(randomD(user_input, data) != None):
+            return(str(randomD(user_input, data)))
 
-        elif "random disease" in user_input.lower():
-            return("Here's one: " + random.choice(list(data.keys()))  + "!") # Returns a random disease
-
+        elif(howMany(user_input, data) != None):
+            return(str(howMany(user_input, data)))
         else:
             answer = chatbot.get_response(user_input)
             if str(answer) == "I am sorry, but I do not understand.": # Bot doesn't know how to answer
